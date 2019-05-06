@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Login</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- jquery min-->
+    <script src="dashboard/jquery/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript">
+        function submitValues(){
+            jdata = { 
+                        username: $("#username").val(),
+                        password : $("#password").val(),
+                    }
+            console.log("data -->"+JSON.stringify(jdata));
+            $.ajax({
+                url : "adminLogin",
+                method : "post",
+                contentType : "application/json",
+                data : JSON.stringify(jdata),
+                error : function err(jqXHR,textStatus,errorThrown){
+                                    console.log("Error")
+                                    console.log("txtStatus -->"+textStatus)
+                                    console.log("errorThrown -->"+err)
+                                },
+                success:function(dataServer,textStatus,jqXHR){
+                            console.log(dataServer);
+                            document.getElementById("msg").innerHTML = dataServer['response'];
+                            window.location = "voterRegistration"
+                        },
+
+            }
+            );
+        }
+    </script>
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                <div class="login-content">
+                    <form method="POST" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Login</h2>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="username" id="username" placeholder="Username"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                       
+                    
+                        <div class="form-group">
+                            <input type="button" name="submit" id="submit" class="form-submit" value="Login" onclick="submitValues()"/>
+                        </div>
+                    </form>
+                    <p id="msg"></p>
+                    <p class="reghere">
+                        Don't have an account ? <a href="file:///C:/Users/arunkc/Desktop/colorlib-regform-8/index.html
+" class="reghere-link">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
